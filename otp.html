@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Otp Generator</title>
+    <link rel="stylesheet" href="otp.css">
+</head>
+<body>
+    <h1>OTP Generator</h1>
+    <div id="otp-container">
+        <h1 id="otp"></h1>
+        <input type="text" id="input" placeholder="Enter OTP"><br><br>
+        <button type="button" id="verifyBtn">Verify</button>
+    </div>
+
+    <script>
+        let otpDisplay = document.querySelector('#otp');
+        let input = document.querySelector('#input');
+        let verifyBtn = document.querySelector('#verifyBtn');
+        let currentOTP;
+        let o = document.createElement('h1');
+        document.body.appendChild(o);
+        o.id = 'out'; 
+
+        // Function to generate a new OTP
+        function generateOTP() 
+        {
+            currentOTP = Math.floor(1000 + Math.random() * 9000); 
+            otpDisplay.innerHTML = "Your OTP is "+currentOTP;
+            input.value = ''; 
+        }
+
+        // Function to verify the entered OTP
+        function verifyOTP() 
+        {
+            let enteredValue = parseInt(input.value, 10);
+            if (enteredValue === currentOTP) 
+            {
+                o.innerHTML = "Verification Successful";
+            } 
+            else 
+            {
+                o.innerHTML = "Verification Failed! Please try again"
+            }
+        }
+        setInterval(generateOTP, 5000);
+
+        
+        verifyBtn.addEventListener('click', verifyOTP);
+    </script>
+</body>
+</html>
+
+</html>
